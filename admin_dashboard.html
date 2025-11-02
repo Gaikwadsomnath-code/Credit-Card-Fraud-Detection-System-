@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center mb-4">Welcome  {{ current_user.name }}</h2>
+    <p class="text-center">You are logged in as: <span class="badge bg-danger text-uppercase">ADMIN</span></p>
+
+    <!-- 🔢 Stats Cards -->
+    <div class="row g-4 mt-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 text-center hover-zoom bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">Total Users</h5>
+                    <p class="card-text display-6">{{ total_users }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 text-center hover-zoom bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">Total Transactions</h5>
+                    <p class="card-text display-6">{{ total_transactions }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 text-center hover-zoom bg-light">
+                <div class="card-body">
+                    <h5 class="card-title">Fraud Alerts</h5>
+                    <p class="card-text display-6">{{ fraud_alerts }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔘 Action Buttons -->
+    <div class="text-center mt-5">
+        <a href="{{ url_for('predict_csv') }}" class="btn btn-warning btn-lg mx-2 ">Upload CSV</a>
+        <a href="{{ url_for('fraud_alerts') }}" class="btn btn-danger btn-lg mx-2 ">View Fraud Alerts</a>
+        <a href="{{ url_for('saved_predictions') }}" class="btn btn-primary btn-lg mx-2">Saved Predictions</a>
+    </div>
+
+    <!-- 📊 Chart Section -->
+    <div class="mt-5">
+        <h4 class="text-center">Transaction Overview</h4>
+        <canvas id="txnChart" height="100" data-safe="{{ safe_txns }}" data-fraud="{{ fraud_txns }}"></canvas>
+    
+    </div>
+    
+</div>
+
+
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+{% endblock %}

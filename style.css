@@ -1,0 +1,7 @@
+/* static/css/style.css */
+.hover-zoom {
+    transition: transform 0.3s;
+}
+.hover-zoom:hover {
+    transform: scale(1.05);
+}

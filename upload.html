@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block title %}Upload Transactions{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h2 class="mb-4">Upload Transactions CSV</h2>
+  
+
+    <!-- 🔹 Upload Form -->
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <input type="file" class="form-control" name="file" accept=".csv" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Predict Fraud</button>
+        
+    </form>
+      <!-- ← Back Button -->
+    <div class="mt-4">
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-primary">← Back to Dashboard</a>
+    </div>
+    
+    
+    {% if transactions %}
+    
+
+    <hr>
+    <h4 class="mt-5">Predicted Transactions</h4>
+
+    <!-- 🔍 Search Box -->
+    <div class="mb-3">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search transactions...">
+    </div>
+ 
+
+
+    <!-- 📋 Transactions Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered mt-3" id="transactionTable">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Card ID</th>
+                    <th>Amount</th>
+                    <th>Merchant</th>
+                    <th>Location</th>
+                    <th>Prediction</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for txn in transactions %}
+                <tr {% if txn.fraud_predicted %} class="table-danger" {% endif %}>
+                    <td>{{ txn.id }}</td>
+                    <td>{{ txn.card_id }}</td>
+                    <td>{{ txn.amount }}</td>
+                    <td>{{ txn.merchant_name }}</td>
+                    <td>{{ txn.location }}</td>
+                    <td>{{ 'Fraud' if txn.fraud_predicted else 'Safe' }}</td>
+                    <td>
+                        {% if txn.fraud_predicted %}
+                        <form method="POST" action="{{ url_for('take_action_on_transaction', txn_id=txn.id) }}" class="d-flex">
+                          <select name="action" class="form-select form-select-sm me-2" required>
+                            <option disabled selected value="">-- Select Action --</option>
+                            <option value="block">Block Card</option>
+                            <option value="alert">Send Alert</option>
+                          </select>
+                          <button type="submit" class="btn btn-sm btn-primary">Apply</button>
+                        </form>
+                        {% else %}
+                        <span class="text-muted">-</span>
+                        {% endif %}
+                      </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+       <!-- ✅ Pagination -->
+{% if pagination.pages > 1 %}
+<nav>
+    <ul class="pagination justify-content-center mt-4">
+        {% if pagination.has_prev %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('upload', page=pagination.prev_num) }}">Previous</a>
+        </li>
+        {% endif %}
+        {% for page_num in pagination.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+            {% if page_num %}
+            <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+                <a class="page-link" href="{{ url_for('upload', page=page_num) }}">{{ page_num }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+        {% if pagination.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('upload', page=pagination.next_num) }}">Next</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+    {% endif %}
+    
+
+   
+</div>
+
+<!-- 🔍 Simple Search Filter/ js -->
+<script>
+    document.getElementById('searchInput').addEventListener('keyup', function () {
+        const query = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#transactionTable tbody tr');
+        rows.forEach(row => {
+            const text = row.innerText.toLowerCase();
+            row.style.display = text.includes(query) ? '' : 'none';
+        });
+    });
+</script>
+{% endblock %}
