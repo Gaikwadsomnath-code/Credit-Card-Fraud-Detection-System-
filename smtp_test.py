@@ -2,10 +2,10 @@ import smtplib
 
 smtp_server = "smtp.gmail.com"
 port = 587
-sender_email = "somamca2025@gmail.com"
-password = "xtmp cgfg ogel rhwh"
+sender_email = "Youremailid@gmail.com"
+password = "Passkey"
 
-receiver_email = "somamca2025@gmail.com"
+receiver_email = "Youremailid@gmail.com"
 message = """\
 Subject: SMTP Test Mail
 
@@ -19,3 +19,4 @@ try:
         print(" SMTP test: Mail sent successfully.")
 except Exception as e:
     print(" SMTP test failed:", e)
+
