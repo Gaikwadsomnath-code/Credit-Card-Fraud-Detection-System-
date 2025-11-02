@@ -37,27 +37,27 @@ from datetime import datetime, timedelta
 
 
 
-# 🔹 Global initialization (हे वर हवंच)(it should be in top)
+#  Global initialization (it should be in top)
 mail = Mail()
 #db = SQLAlchemy()
 
-# 🔹 Initialize Flask app
+#  Initialize Flask app
 app = Flask(__name__)
 app.config.from_object(Config)
 
 #initialize mail appa
 mail.init_app(app)
 
-# 🔹 Initialize database
+#  Initialize database
 db.init_app(app)
 
-# 🔹 Initialize login manager
+#  Initialize login manager
 login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
 
 
-# 🔹 User loader callback for Flask-Login
+#  User loader callback for Flask-Login
 @login_manager.user_loader
 def load_user(user_id):
      return db.session.get(User, int(user_id))
@@ -204,12 +204,12 @@ def predict_csv():
         predictions = model.predict(df.drop(['user_id', 'card_id', 'merchant_name', 'location', 'amount'], axis=1))
         df['Prediction'] = predictions
 
-        # 🔹 Generate new batch ID
+        #  Generate new batch ID
         batch_id = str(uuid.uuid4())
         session['latest_batch_id'] = batch_id
 
         for _, row in df.iterrows():
-            # 🔸 Check if card exists
+            #  Check if card exists
             card = Card.query.get(int(row['card_id']))
             if not card:
                 card = Card(
@@ -223,7 +223,7 @@ def predict_csv():
                 db.session.add(card)
                 db.session.flush()  # Get card.id
 
-            # 🔸 Create Transaction
+            #  Create Transaction
             txn = Transaction(
                 user_id=current_user.id,
                 card_id=int(row['card_id']),
@@ -240,7 +240,7 @@ def predict_csv():
             db.session.add(txn)
             db.session.flush()
 
-            # 🔸 Create Alert if fraud
+            #  Create Alert if fraud
             if row['Prediction'] == 1:
                 alert = FraudAlert(
                     transaction_id=txn.id,
@@ -285,7 +285,7 @@ def saved_predictions():
     per_page = 10
     #query = Transaction.query.filter_by(is_prediction=True)  # सर्व predicted transactions, fraud + genuine
 
-    query = Transaction.query  # ✅ sagle record ghetoy (no is_prediction filter)
+    query = Transaction.query  #  sagle record ghetoy (no is_prediction filter)
 
     # Search Filter
     if search:
@@ -360,7 +360,7 @@ def download_saved_predictions():
 
 
 
-# 🧠 Fraud Alerts
+#  Fraud Alerts
 @app.route('/fraud_alerts')
 @login_required
 def fraud_alerts():
@@ -404,7 +404,7 @@ def fraud_alerts():
     elif confirmation_filter == "unconfirmed":
         query = query.filter(FraudAlert.confirmed_by_user.is_(None))
 
-    # 🗓 Date filtering
+    #  Date filtering
     if from_date:
         try:
             query = query.filter(FraudAlert.alert_time >= from_date)
@@ -456,10 +456,10 @@ def take_action(alert_id):
     elif action == 'false_alarm':
         alert.confirmed_by_user = False
         if card.status == 'blocked':
-            card.status = 'active'  # 👉 If wrongly blocked, unblock
+            card.status = 'active'  #  If wrongly blocked, unblock
 
     db.session.commit()
-    flash(f"✅ Action recorded: {action} for Alert ID {alert.id}")
+    flash(f" Action recorded: {action} for Alert ID {alert.id}")
     return redirect(url_for('fraud_alerts'))
 
 
@@ -556,5 +556,6 @@ if __name__ == '__main__':
             print(" Error during DB setup:", e)
 
     app.run(debug=True)
+
 
 
