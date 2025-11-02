@@ -8,8 +8,8 @@ def send_fraud_alert_email(to_email, transaction_id, amount):
     try:
         msg = Message(
             subject=" Fraud Alert - SafeSwipe",
-            sender='somamca2025@gmail.com',   # Same as MAIL_DEFAULT_SENDER
-            recipients=['somamca2025@gmail.com']             # Usually: admin email or fixed recipient
+            sender='Yourmailid',   # Same as MAIL_DEFAULT_SENDER
+            recipients=["Mailid"]             # Usually: admin email or fixed recipient
         )
         msg.body = f"""
             Fraud Alert Notification
@@ -29,3 +29,4 @@ def send_fraud_alert_email(to_email, transaction_id, amount):
     except Exception as e:
         print(" Failed to send email.")
         print(f" Error: {e}")
+
