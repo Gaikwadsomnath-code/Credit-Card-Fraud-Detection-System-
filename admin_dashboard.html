@@ -6,7 +6,7 @@
     <h2 class="text-center mb-4">Welcome  {{ current_user.name }}</h2>
     <p class="text-center">You are logged in as: <span class="badge bg-danger text-uppercase">ADMIN</span></p>
 
-    <!-- 🔢 Stats Cards -->
+    <!--  Stats Cards -->
     <div class="row g-4 mt-4">
         <div class="col-md-4">
             <div class="card shadow-sm border-0 text-center hover-zoom bg-light">
@@ -34,14 +34,14 @@
         </div>
     </div>
 
-    <!-- 🔘 Action Buttons -->
+    <!--  Action Buttons -->
     <div class="text-center mt-5">
         <a href="{{ url_for('predict_csv') }}" class="btn btn-warning btn-lg mx-2 ">Upload CSV</a>
         <a href="{{ url_for('fraud_alerts') }}" class="btn btn-danger btn-lg mx-2 ">View Fraud Alerts</a>
         <a href="{{ url_for('saved_predictions') }}" class="btn btn-primary btn-lg mx-2">Saved Predictions</a>
     </div>
 
-    <!-- 📊 Chart Section -->
+    <!--  Chart Section -->
     <div class="mt-5">
         <h4 class="text-center">Transaction Overview</h4>
         <canvas id="txnChart" height="100" data-safe="{{ safe_txns }}" data-fraud="{{ fraud_txns }}"></canvas>
@@ -57,3 +57,4 @@
 
 
 {% endblock %}
+
