@@ -20,7 +20,7 @@
   
 
 
-<!-- 🔹 Navbar -->
+<!--  Navbar -->
 <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">SafeSwipe</a>
@@ -42,10 +42,10 @@
   </div>
 </nav>
 
-<!-- 🔹 Main Container -->
+<!--  Main Container -->
 <div class="container mt-4">
 
-    <!-- 🔹 Flash Messages -->
+    <!--  Flash Messages -->
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         {% for message in messages %}
@@ -57,7 +57,7 @@
       {% endif %}
     {% endwith %}
 
-    <!-- 🔹 Page Content Block -->
+    <!--  Page Content Block -->
     {% block content %}{% endblock %}
 </div>
 
@@ -70,3 +70,4 @@
 
 </body>
 </html>
+
