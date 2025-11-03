@@ -11,7 +11,7 @@
 <div class="container mt-5">
     <h2 class="mb-4">Fraud Alerts</h2>
 
-    <!-- 🔍 Filter, Search & Date Form -->
+    <!--  Filter, Search & Date Form -->
     <form method="GET" action="{{ url_for('fraud_alerts') }}" class="row g-3 mb-4">
         <div class="col-md-3">
             <input type="text" name="search" class="form-control" placeholder="Search ID, Merchant, Location, Amount"
@@ -56,7 +56,7 @@
         </div>
     </form>
 
-    <!-- 🧾 Alerts Table -->
+    <!--  Alerts Table -->
     {% if alerts %}
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
@@ -142,3 +142,4 @@
     {% endif %}
 </div>
 {% endblock %}
+
