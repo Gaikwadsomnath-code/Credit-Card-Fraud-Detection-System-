@@ -6,7 +6,7 @@
     <h2 class="mb-4">Upload Transactions CSV</h2>
   
 
-    <!-- 🔹 Upload Form -->
+    <!--  Upload Form -->
     <form method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <input type="file" class="form-control" name="file" accept=".csv" required>
@@ -26,14 +26,14 @@
     <hr>
     <h4 class="mt-5">Predicted Transactions</h4>
 
-    <!-- 🔍 Search Box -->
+    <!--  Search Box -->
     <div class="mb-3">
         <input type="text" id="searchInput" class="form-control" placeholder="Search transactions...">
     </div>
  
 
 
-    <!-- 📋 Transactions Table -->
+    <!--  Transactions Table -->
     <div class="table-responsive">
         <table class="table table-bordered mt-3" id="transactionTable">
             <thead class="table-dark">
@@ -75,7 +75,7 @@
             </tbody>
         </table>
     </div>
-       <!-- ✅ Pagination -->
+       <!--  Pagination -->
 {% if pagination.pages > 1 %}
 <nav>
     <ul class="pagination justify-content-center mt-4">
@@ -105,7 +105,7 @@
    
 </div>
 
-<!-- 🔍 Simple Search Filter/ js -->
+<!--  Simple Search Filter/ js -->
 <script>
     document.getElementById('searchInput').addEventListener('keyup', function () {
         const query = this.value.toLowerCase();
@@ -117,3 +117,4 @@
     });
 </script>
 {% endblock %}
+
