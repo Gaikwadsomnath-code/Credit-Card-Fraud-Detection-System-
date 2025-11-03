@@ -11,7 +11,7 @@
 <div class="container mt-5">
     <h2 class="mb-4">Saved Predictions</h2>
 
-    <!-- 🔍 Filters Form -->
+    <!--  Filters Form -->
     <form method="GET" action="{{ url_for('saved_predictions') }}" class="row g-3 mb-4">
         <div class="col-md-3">
             <input type="text" name="search" class="form-control" placeholder="Search Merchant / Location / Amount" value="{{ request.args.get('search', '') }}">
@@ -76,7 +76,7 @@
             </table>
         </div>
 
-        <!-- ✅ Pagination -->
+        <!--  Pagination -->
         {% if pagination.pages > 1 %}
         <nav>
             <ul class="pagination justify-content-center mt-4">
@@ -106,3 +106,4 @@
     {% endif %}
 </div>
 {% endblock %}
+
