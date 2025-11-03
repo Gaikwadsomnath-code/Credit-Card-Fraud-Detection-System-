@@ -9,7 +9,8 @@ class Config:
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = 'somamca2025@gmail.com'
-    MAIL_PASSWORD = 'xtmp cgfg ogel rhwh'
-    MAIL_DEFAULT_SENDER = 'somamca2025@gmail.com'
+    MAIL_USERNAME = 'UserEmailID'
+    MAIL_PASSWORD = 'Mail passkey'
+    MAIL_DEFAULT_SENDER = 'Sendermailid'
+
     
